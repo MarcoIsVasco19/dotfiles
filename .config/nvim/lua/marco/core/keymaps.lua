@@ -19,6 +19,10 @@ keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment
 keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
 
+-- quick quit
+keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit current window" })
+keymap.set("n", "<leader>Q", "<cmd>qa<CR>", { desc = "Quit all windows" })
+
 -- window management
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
 keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
