@@ -23,6 +23,10 @@ keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decremen
 keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit current window" })
 keymap.set("n", "<leader>Q", "<cmd>qa<CR>", { desc = "Quit all windows" })
 
+-- save file
+keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
+keymap.set("i", "<C-s>", "<ESC><cmd>w<CR>", { desc = "Save file and exit insert mode" })
+
 -- window management
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
 keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally

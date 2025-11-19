@@ -2,11 +2,40 @@
 
 # Dotfiles installation script
 # This script creates symlinks from the home directory to the dotfiles repository
+#
+# Usage:
+#   ./install.sh           # Install Neovim config only
+#   ./install.sh --bash    # Install Neovim config + bash profiles
 
 set -e
 
 # Get the directory where this script is located
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Parse command line arguments
+INSTALL_BASH=false
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --bash)
+            INSTALL_BASH=true
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: $0 [--bash] [--help]"
+            echo ""
+            echo "Options:"
+            echo "  --bash    Include bash configuration files (.bashrc, .bash_profile)"
+            echo "  --help    Show this help message"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
 
 echo "Installing dotfiles from: $DOTFILES_DIR"
 echo ""
@@ -38,11 +67,13 @@ create_symlink() {
 echo "Setting up symlinks..."
 echo ""
 
-# Bash configuration files
-echo "Bash configuration:"
-create_symlink "$DOTFILES_DIR/.bashrc" "$HOME/.bashrc"
-create_symlink "$DOTFILES_DIR/.bash_profile" "$HOME/.bash_profile"
-echo ""
+# Bash configuration files (optional)
+if [ "$INSTALL_BASH" = true ]; then
+    echo "Bash configuration:"
+    create_symlink "$DOTFILES_DIR/.bashrc" "$HOME/.bashrc"
+    create_symlink "$DOTFILES_DIR/.bash_profile" "$HOME/.bash_profile"
+    echo ""
+fi
 
 # Neovim configuration
 echo "Neovim configuration:"
@@ -51,5 +82,11 @@ echo ""
 
 echo "Installation complete!"
 echo ""
-echo "Note: You may need to restart your shell or run 'source ~/.bashrc' for bash changes to take effect."
-echo "For Neovim, just restart the editor."
+
+if [ "$INSTALL_BASH" = true ]; then
+    echo "Note: You may need to restart your shell or run 'source ~/.bashrc' for bash changes to take effect."
+    echo "For Neovim, just restart the editor."
+else
+    echo "Note: Bash configuration was skipped. Use './install.sh --bash' to install bash configs."
+    echo "For Neovim, just restart the editor."
+fi
