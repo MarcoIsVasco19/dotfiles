@@ -1,6 +1,5 @@
 #
 # ~/.bashrc
-#
 
 # source ~/.git-prompt.sh
 
@@ -41,14 +40,47 @@ alias whatsmyip="curl 'https://api.ipify.org?format=json'"
 # kubectl
 alias k='kubectl'
 alias kctx='kubectx'
-complete -o default -F __start_kubectl k
 alias cctl='clusterctl'
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+if command -v kubectl >/dev/null 2>&1; then
+  for bash_completion in \
+    /opt/homebrew/etc/profile.d/bash_completion.sh \
+    /usr/local/etc/profile.d/bash_completion.sh \
+    /opt/homebrew/etc/bash_completion \
+    /usr/local/etc/bash_completion \
+    /usr/share/bash-completion/bash_completion \
+    /etc/bash_completion
+  do
+    if [ -r "${bash_completion}" ]; then
+      source "${bash_completion}"
+      break
+    fi
+  done
+
+  if declare -F _get_comp_words_by_ref >/dev/null 2>&1; then
+    source <(kubectl completion bash)
+    complete -o default -F __start_kubectl k
+  fi
+fi
 
 ## KUBECONFIG stuff
-#export KUBECONFIG="${KUBECONFIG}:${HOME}/.kube/config:${HOME}/.kube/bks-nonprod.yml"
-#kubectl config view --flatten > ~/.kube/combined-config
-#cp ~/.kube/combined-config ~/.kube/config
+export KUBECONFIG_SOURCES="${HOME}/.kube/config:${HOME}/.kube/wur-config:${HOME}/.kube/mzansi-k8s.yml"
+export KUBECONFIG="${HOME}/.kube/combined-config"
+
+kubeconfig-rebuild() {
+  local current_context
+
+  current_context="$(kubectl config current-context 2>/dev/null || true)"
+  KUBECONFIG="${KUBECONFIG_SOURCES}" kubectl config view --flatten > "${KUBECONFIG}"
+
+  if [ -n "${current_context}" ]; then
+    kubectl config use-context "${current_context}" >/dev/null 2>&1 || true
+  fi
+}
 
 
 eval "$(starship init bash)"
 
+# opencode
+export PATH=/home/adm_m075/.opencode/bin:$PATH
