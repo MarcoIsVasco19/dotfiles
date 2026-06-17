@@ -29,10 +29,14 @@ return {
         "graphql",
         "pyright",
         "yamlls",
+        "helm_ls",
         "puppet",
         "bashls",
         "ansiblels",
         "gh_actions_ls"
+      },
+      automatic_enable = {
+        exclude = { "helm_ls", "yamlls" },
       },
     })
   end,

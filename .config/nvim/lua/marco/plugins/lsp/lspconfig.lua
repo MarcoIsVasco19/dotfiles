@@ -70,6 +70,31 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
+    vim.filetype.add({
+      pattern = {
+        [".*/templates/.*%.yaml"] = "helm",
+        [".*/templates/.*%.yml"] = "helm",
+        [".*/templates/.*%.tpl"] = "helm",
+        [".*/values%.yaml"] = "yaml.helm-values",
+        [".*/values%.yml"] = "yaml.helm-values",
+      },
+    })
+
+    vim.lsp.config("helm_ls", {
+      capabilities = capabilities,
+    })
+    vim.lsp.enable("helm_ls")
+
+    vim.lsp.config("yamlls", {
+      capabilities = capabilities,
+      filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" },
+      settings = {
+        redhat = { telemetry = { enabled = false } },
+        yaml = { format = { enable = true } },
+      },
+    })
+    vim.lsp.enable("yamlls")
+
     -- Change the Diagnostic symbols in the sign column (gutter)
     -- (not in youtube nvim video)
     local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
@@ -79,4 +104,3 @@ return {
     end
   end,
 }
-

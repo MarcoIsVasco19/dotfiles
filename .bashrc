@@ -84,3 +84,4 @@ eval "$(starship init bash)"
 
 # opencode
 export PATH=/home/adm_m075/.opencode/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"

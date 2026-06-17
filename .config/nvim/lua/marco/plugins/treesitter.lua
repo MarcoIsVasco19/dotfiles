@@ -27,6 +27,7 @@ return {
         "javascript",
         "tsx",
         "yaml",
+        "helm",
         "html",
         "css",
         "prisma",
@@ -45,7 +46,7 @@ return {
         "python",
         "go",
         "terraform",
-        "groovy"
+        "groovy",
       },
       incremental_selection = {
         enable = true,
