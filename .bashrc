@@ -38,6 +38,7 @@ alias repos='cd ~/repos'
 alias whatsmyip="curl 'https://api.ipify.org?format=json'"
 
 # kubectl
+alias kssh='f() { ssh -i ~/.ssh/k8s_id_rsa ubuntu@$1 ; } ; f'
 alias k='kubectl'
 alias kctx='kubectx'
 alias cctl='clusterctl'
@@ -83,5 +84,5 @@ kubeconfig-rebuild() {
 eval "$(starship init bash)"
 
 # opencode
-export PATH=/home/adm_m075/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"

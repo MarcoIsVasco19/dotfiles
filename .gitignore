@@ -1,0 +1,7 @@
+# AI assistant instruction files — not for version control
+CLAUDE.md
+AGENTS.md
+
+# Editor runtime logs
+.nvimlog
+*.log
