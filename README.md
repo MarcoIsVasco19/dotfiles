@@ -1,11 +1,12 @@
 # dotfiles
 
-Personal configuration files for bash and Neovim.
+Personal configuration files for bash, Neovim and Ghostty.
 
 ## Contents
 
 - **Shell configuration** - `.bashrc` and `.bash_profile` with custom aliases and tool integrations
 - **Neovim configuration** - Lua-based setup with lazy.nvim plugin manager
+- **Ghostty configuration** - Terminal font, theme and transparency
 
 ## Installation
 
@@ -19,6 +20,9 @@ Personal configuration files for bash and Neovim.
 
 **Neovim:**
 - Neovim 0.9+ (for Lua configuration support)
+
+**Ghostty:**
+- Ubuntu Mono font installed
 
 ### Install dotfiles
 
@@ -72,6 +76,12 @@ To remove the symlinks and restore your original configuration:
 - **Session Management**: Auto-session for workspace persistence
 - **Leader Key**: Space
 
+### Ghostty Configuration
+
+- **Font**: Ubuntu Mono, size 16
+- **Theme**: Ubuntu
+- **Window**: 0.85 background opacity with blur
+
 See [CLAUDE.md](./CLAUDE.md) for detailed configuration documentation.
 
 ## Repository Structure
@@ -83,6 +93,8 @@ See [CLAUDE.md](./CLAUDE.md) for detailed configuration documentation.
 ├── .bashrc              # Main bash configuration
 ├── .bash_profile        # macOS-specific bash setup
 └── .config/
+    ├── ghostty/
+    │   └── config       # Ghostty terminal configuration
     └── nvim/            # Neovim configuration
         ├── init.lua     # Entry point
         └── lua/marco/   # Configuration namespace
@@ -97,6 +109,7 @@ After installation, all files are symlinked. Edit files in the repository and ch
 
 - **Bash changes**: Run `source ~/.bashrc` or restart your shell
 - **Neovim changes**: Restart Neovim or run `:source ~/.config/nvim/init.lua`
+- **Ghostty changes**: Reload the config with `Cmd+Shift+,` or restart Ghostty
 
 ## Syncing Across Machines
 

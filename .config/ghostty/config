@@ -1,0 +1,10 @@
+term = xterm-256color
+shell-integration = detect
+font-size = 16
+
+
+# Ubuntu terminal look
+font-family = Ubuntu Mono
+theme = Ubuntu
+background-opacity = 0.85
+background-blur = 20

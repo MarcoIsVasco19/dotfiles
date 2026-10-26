@@ -4,8 +4,8 @@
 # This script removes symlinks and restores backups
 #
 # Usage:
-#   ./uninstall.sh           # Uninstall Neovim config only
-#   ./uninstall.sh --bash    # Uninstall Neovim config + bash profiles
+#   ./uninstall.sh           # Uninstall Neovim + Ghostty config only
+#   ./uninstall.sh --bash    # Uninstall Neovim + Ghostty config + bash profiles
 
 set -e
 
@@ -70,6 +70,11 @@ fi
 # Neovim configuration
 echo "Neovim configuration:"
 remove_symlink "$HOME/.config/nvim"
+echo ""
+
+# Ghostty configuration
+echo "Ghostty configuration:"
+remove_symlink "$HOME/.config/ghostty"
 echo ""
 
 echo "Uninstallation complete!"

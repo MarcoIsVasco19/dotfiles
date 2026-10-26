@@ -4,8 +4,8 @@
 # This script creates symlinks from the home directory to the dotfiles repository
 #
 # Usage:
-#   ./install.sh           # Install Neovim config only
-#   ./install.sh --bash    # Install Neovim config + bash profiles
+#   ./install.sh           # Install Neovim + Ghostty config only
+#   ./install.sh --bash    # Install Neovim + Ghostty config + bash profiles
 
 set -e
 
@@ -78,6 +78,11 @@ fi
 # Neovim configuration
 echo "Neovim configuration:"
 create_symlink "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
+echo ""
+
+# Ghostty configuration
+echo "Ghostty configuration:"
+create_symlink "$DOTFILES_DIR/.config/ghostty" "$HOME/.config/ghostty"
 echo ""
 
 echo "Installation complete!"
